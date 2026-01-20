@@ -1,0 +1,26 @@
+{
+  "name": "cithree",
+  "version": "1.0.0",
+  "description": "This is a CodeIgniter 3 playground project designed for development and testing purposes. It contains the full CodeIgniter framework structure with application and system directories.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "copy-asset:select2": "cp -r node_modules/select2/dist application/assets/vendor/select2",
+    "copy-asset:jquery": "cp -r node_modules/jquery/dist application/assets/vendor/jquery"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codefish06/cithree.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codefish06/cithree/issues"
+  },
+  "homepage": "https://github.com/codefish06/cithree#readme",
+  "dependencies": {
+    "jquery": "^4.0.0",
+    "select2": "^4.1.0-rc.0"
+  }
+}
