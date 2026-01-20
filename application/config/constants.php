@@ -3,6 +3,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
+| Application Constants
+|--------------------------------------------------------------------------
+|
+| These constants define metadata about the application including its name,
+| version number, and build identifier. These can be used throughout the
+| application for versioning, logging, and informational purposes.
+|
+*/
+defined('APP_NAME')    OR define('APP_NAME', 'cithree');
+defined('APP_VERSION') OR define('APP_VERSION', '1.0.0');
+defined('APP_BUILD')   OR define('APP_BUILD', '001');
+
+/*
+|--------------------------------------------------------------------------
 | Display Debug backtrace
 |--------------------------------------------------------------------------
 |
