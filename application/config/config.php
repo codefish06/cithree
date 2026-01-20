@@ -30,6 +30,8 @@ $config['base_url'] = 'http://localhost:8005/';
 | Alternative Base URL Setup Methods
 |--------------------------------------------------------------------------
 |
+|   TODO: Consider using .env file for base URL configuration
+    
     Option 4: Using .env file (Modern approach)
     First, install vlucas/phpdotenv via composer:
     bashcomposer require vlucas/phpdotenv
