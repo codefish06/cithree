@@ -8,8 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link href="<?php echo base_url('application/assets/css/output.css'); ?>" rel="stylesheet">
 
 	<!-- Select2 CSS -->
-	<link href="<?php echo base_url('assets/vendor/select2/css/select2.min.css'); ?>" rel="stylesheet" />
-	<link href="<?php echo base_url('assets/vendor/select2/css/select2-bootstrap-5-theme.min.css'); ?>" rel="stylesheet" />
+	<link href="<?php echo base_url('application/assets/vendor/select2/css/select2.min.css'); ?>" rel="stylesheet" />
 
 
 </head>
@@ -63,22 +62,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <!-- jQuery -->
-<script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
+<script src="<?php echo base_url('application/assets/vendor/jquery/jquery.min.js'); ?>"></script>
 
 <!-- Select2 JS -->
-<script src="<?php echo base_url('assets/vendor/select2/js/select2.min.js'); ?>"></script>
+<script src="<?php echo base_url('application/assets/vendor/select2/js/select2.min.js'); ?>"></script>
 
 <script>
 	$(document).ready(function() {
+		console.log("Initializing Select2...");
 		$('#singleSelect').select2({
 			placeholder: "Select an option",
 			allowClear: true,
-			theme: "bootstrap-5"
 		});
 
 		$('#multipleSelect').select2({
 			placeholder: "Select options",
-			theme: "bootstrap-5"
+		});
+
+		$('#tagsSelect').select2({
+			placeholder: "Select options",
 		});
 	});
 </script>
