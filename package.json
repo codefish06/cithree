@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "copy-asset:select2": "cp -r node_modules/select2/dist application/assets/vendor/select2",
-    "copy-asset:jquery": "cp -r node_modules/jquery/dist application/assets/vendor/jquery"
+    "copy-asset:jquery": "cp -r node_modules/jquery/dist application/assets/vendor/jquery",
+    "build:css": "tailwindcss -i ./application/assets/css/input.css -o ./application/assets/css/output.css",
+    "watch:css": "tailwindcss -i ./application/assets/css/input.css -o ./application/assets/css/output.css --watch"
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,9 @@
   },
   "homepage": "https://github.com/codefish06/cithree#readme",
   "dependencies": {
+    "@tailwindcss/cli": "^4.1.18",
     "jquery": "^4.0.0",
-    "select2": "^4.1.0-rc.0"
+    "select2": "^4.1.0-rc.0",
+    "tailwindcss": "^4.1.18"
   }
 }
