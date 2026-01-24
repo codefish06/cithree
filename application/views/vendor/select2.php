@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<form>
 			<div class="mb-5 p-4 bg-gray-100 border border-gray-200 rounded">
-				<label for="singleSelect" class="block mb-2 font-bold text-gray-900">Single Select</label>
+				<label for="singleSelect" class="block mb-2 font-bold text-gray-900">Basic Single Select</label>
 				<select id="singleSelect" class="form-control w-full" style="width: 100%;">
 					<option></option>
 					<option value="1">Option 1</option>
@@ -33,7 +33,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<option value="4">Option 4</option>
 				</select>
 			</div>
-
+			<div class="mb-5 p-4 bg-gray-100 border border-gray-200 rounded">
+				<label for="singleCustomSelect" class="block mb-2 font-bold text-gray-900">Single Custom Select</label>
+				<select id="singleCustomSelect" class="form-control w-full" style="width: 100%;">
+					<option></option>
+					<option value="1">Option 1</option>
+					<option value="2">Option 2</option>
+					<option value="3">Option 3</option>
+					<option value="4">Option 4</option>
+				</select>
+			</div>
 			<div class="mb-5 p-4 bg-gray-100 border border-gray-200 rounded">
 				<label for="multipleSelect" class="block mb-2 font-bold text-gray-900">Multiple Select</label>
 				<select id="multipleSelect" class="form-control w-full" multiple="multiple" style="width: 100%;">
@@ -44,7 +53,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<option value="5">Option 5</option>
 				</select>
 			</div>
-
             <div class="mb-5 p-4 bg-gray-100 border border-gray-200 rounded">
                 <label for="tagsSelect" class="block mb-2 font-bold text-gray-900">Tagging Support</label>
                 <select id="tagsSelect" class="form-control w-full" multiple="multiple" style="width: 100%;">
@@ -73,6 +81,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		$('#singleSelect').select2({
 			placeholder: "Select an option",
 			allowClear: true,
+		});
+
+		$('#singleCustomSelect').select2({
+			placeholder: "Select an option",
+			allowClear: true,
+			dropdownCssClass: 'custom-select2-dropdown', // Custom CSS class for dropdown
 		});
 
 		$('#multipleSelect').select2({
