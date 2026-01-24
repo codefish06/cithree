@@ -23,7 +23,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+$config['base_url'] = 'http://localhost:8005/';
+
+/*
+|---------------------------------------------------------------------------
+| Alternative Base URL Setup Methods
+|--------------------------------------------------------------------------
+|
+|   TODO: Consider using .env file for base URL configuration
+    
+    Option 4: Using .env file (Modern approach)
+    First, install vlucas/phpdotenv via composer:
+    bashcomposer require vlucas/phpdotenv
+    In index.php (before loading CodeIgniter):
+    phprequire_once __DIR__ . '/vendor/autoload.php';
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
+    ```
+
+    Create `.env` file in project root:
+    ```
+    BASE_URL=http://localhost:8005/
+    In config.php:
+    php$config['base_url'] = getenv('BASE_URL') ?: 'http://localhost/';
+|
+|--------------------------------------------------------------------------
+*/
 
 /*
 |--------------------------------------------------------------------------
