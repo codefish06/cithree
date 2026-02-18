@@ -6,10 +6,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta charset="utf-8">
 	<title>Vendor Testing - <?php echo APP_NAME; ?></title>
 	<link href="<?php echo base_url('application/assets/css/output.css'); ?>" rel="stylesheet">
+	<link href="<?php echo base_url('application/assets/css/grid-layout.css'); ?>" rel="stylesheet">
 </head>
 <body class="bg-white text-gray-600 font-sans">
 
-<div class="m-3 border border-gray-300 shadow-lg">
+<div class="grid-container">
+	<?php $this->load->view('template/header_menu'); ?>
+	<main>
 	<h1 class="text-2xl font-normal text-gray-700 border-b border-gray-300 p-4 pb-2 mb-5">Vendor Package Testing</h1>
 
 	<div class="mx-4 my-6">
@@ -39,8 +42,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</table>
 
 	</div>
+	</main>
+	<?php $this->load->view('template/footer'); ?>
 
-	<p class="text-right text-xs border-t border-gray-300 py-8 px-3 mt-5">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' . ' | APP Version <strong>' . APP_VERSION . '</strong>' : '' ?></p>
 </div>
 
 </body>

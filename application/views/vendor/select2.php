@@ -9,12 +9,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<!-- Select2 CSS -->
 	<link href="<?php echo base_url('application/assets/vendor/select2/css/select2.min.css'); ?>" rel="stylesheet" />
-
+	<link href="<?php echo base_url('application/assets/css/grid-layout.css'); ?>" rel="stylesheet">	
 
 </head>
 <body class="bg-white text-gray-600 font-sans">
 
-<div class="m-3 border border-gray-300 shadow-lg">
+<div class="grid-container">
+	<?php $this->load->view('template/header_menu'); ?>
+	<main>
 	<h1 class="text-2xl font-normal text-gray-700 border-b border-gray-300 p-4 pb-2 mb-5">Select2 Vendor Testing</h1>
 
 	<div class="mx-4 my-6">
@@ -65,8 +67,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<p class="mb-2"><a href="<?php echo base_url('vendor'); ?>" class="text-blue-600 hover:text-orange-700">Back to Vendor Testing</a></p>
 	</div>
-
-	<p class="text-right text-xs border-t border-gray-300 py-8 px-3 mt-5">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' . ' | APP Version <strong>' . APP_VERSION . '</strong>' : '' ?></p>
+	</main>
+	<?php $this->load->view('template/footer'); ?>	
 </div>
 
 <!-- jQuery -->
