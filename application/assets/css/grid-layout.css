@@ -1,17 +1,17 @@
 .grid-container {
-		display: grid;
-		grid-template-columns: 250px 1fr;
+			display: grid;
+			grid-template-columns: 250px 1fr;
 		grid-template-rows: auto 1fr auto;
-		gap: 1rem;
+		gap: .3rem;
 		min-height: 100vh;
-		padding: 1rem;
+		padding: .3rem;
 	}
 
 	.grid-container header {
 		grid-column: 1 / -1;
 		background-color: #f3f4f6;
 		border: 1px solid #d1d5db;
-		padding: 1.5rem;
+		padding: .5rem;
 		border-radius: 0.375rem;
 	}
 
@@ -94,6 +94,21 @@
 		display: none;
 		transform: translateX(-100%);
 	}
+
+/* When menu is collapsed on desktop, make main occupy full width */
+.grid-container.menu-collapsed {
+    grid-template-columns: 1fr;
+}
+
+/* When menu is collapsed ensure aside is removed from layout and main stays in row 2 column 1
+   so footer remains at the bottom (prevents implicit column creation). */
+.grid-container.menu-collapsed aside {
+	display: none;
+}
+
+.grid-container.menu-collapsed main {
+	grid-column: 1;
+}
 
 	/* Tablet and phone view (max-width: 1024px) */
 	@media (max-width: 1024px) {

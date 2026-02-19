@@ -49,13 +49,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const menuSidebar = document.getElementById('menu-sidebar');
     const menuIcon = document.getElementById('menu-icon');
     const closeIcon = document.getElementById('close-icon');
+    const gridContainer = document.querySelector('.grid-container');
     
     // Check if menu is hidden in localStorage
     const isMenuHidden = localStorage.getItem('menuHidden') === 'true';
     if (isMenuHidden) {
         menuSidebar.classList.add('hidden');
-        menuIcon.classList.add('hidden');
-        closeIcon.classList.remove('hidden');
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        if (gridContainer) gridContainer.classList.add('menu-collapsed');
+    } else {
+        if (gridContainer) gridContainer.classList.remove('menu-collapsed');
     }
     
     // Toggle menu visibility
@@ -63,7 +67,13 @@ document.addEventListener('DOMContentLoaded', function() {
         menuSidebar.classList.toggle('hidden');
         menuIcon.classList.toggle('hidden');
         closeIcon.classList.toggle('hidden');
-        
+
+        // On desktop, make main occupy remaining space when menu hidden
+        if (gridContainer && window.innerWidth >= 1024) {
+            const isHidden = menuSidebar.classList.contains('hidden');
+            gridContainer.classList.toggle('menu-collapsed', isHidden);
+        }
+
         // Save preference to localStorage
         const isHidden = menuSidebar.classList.contains('hidden');
         localStorage.setItem('menuHidden', isHidden);
@@ -75,19 +85,30 @@ document.addEventListener('DOMContentLoaded', function() {
         const menuOverlay = document.getElementById('menu-overlay');
         
         if (isSmallScreen) {
-            // On mobile/tablet, use modal behavior
+            // On mobile/tablet, use modal behavior and ensure menu is hidden
             menuSidebar.classList.add('menu-modal');
-            if (isMenuHidden) {
-                menuSidebar.classList.add('hidden');
-            }
-        } else {
-            // On desktop, show as sidebar
-            menuSidebar.classList.remove('menu-modal');
-            menuSidebar.classList.remove('hidden');
-            menuIcon.classList.add('hidden');
-            closeIcon.classList.remove('hidden');
+            menuSidebar.classList.add('hidden');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
             menuOverlay.classList.add('hidden');
-            localStorage.setItem('menuHidden', 'false');
+            if (gridContainer) gridContainer.classList.remove('menu-collapsed');
+            localStorage.setItem('menuHidden', 'true');
+        } else {
+            // On desktop, restore sidebar state from localStorage
+            menuSidebar.classList.remove('menu-modal');
+            const storedHidden = localStorage.getItem('menuHidden') === 'true';
+            if (storedHidden) {
+                menuSidebar.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                if (gridContainer) gridContainer.classList.add('menu-collapsed');
+            } else {
+                menuSidebar.classList.remove('hidden');
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+                if (gridContainer) gridContainer.classList.remove('menu-collapsed');
+            }
+            menuOverlay.classList.add('hidden');
         }
     }
     
