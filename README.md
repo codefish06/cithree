@@ -4,7 +4,7 @@ This is a CodeIgniter 3 playground project designed for development and testing 
 ## Project Structure
 
 ```
-cithree/
+Coal/
 ├── application/              # Your application code
 │   ├── cache/               # Cached data storage
 │   ├── config/              # Configuration files
@@ -142,7 +142,7 @@ CodeIgniter framework files. Typically not modified during development.
 
 ```bash
 git clone https://github.com/codefish06/cithree.git
-cd cithree
+cd Coal
 ```
 
 ### 2. Install PHP Dependencies
@@ -181,7 +181,7 @@ Configure your web server (Apache/Nginx) to point to the project root directory.
 
 ### 7. Start Development
 
-- Access your application at `http://localhost/cithree/` (adjust based on your setup)
+- Access your application at `http://localhost/coal/` (adjust based on your setup)
 - Keep the Tailwind CSS watch process running: `npm run watch:css`
 - Modify views and Tailwind classes as needed
 
