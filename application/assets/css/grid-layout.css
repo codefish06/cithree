@@ -1,0 +1,148 @@
+.grid-container {
+			display: grid;
+			grid-template-columns: 250px 1fr;
+		grid-template-rows: auto 1fr auto;
+		gap: .3rem;
+		min-height: 100vh;
+		padding: .3rem;
+	}
+
+	.grid-container header {
+		grid-column: 1 / -1;
+		background-color: #f3f4f6;
+		border: 1px solid #d1d5db;
+		padding: .5rem;
+		border-radius: 0.375rem;
+	}
+
+	.grid-container aside {
+		grid-row: 2;
+		grid-column: 1;
+		background-color: #f9fafb;
+		border: 1px solid #d1d5db;
+		padding: 1rem;
+		border-radius: 0.375rem;
+		transition: all 0.3s ease-in-out;
+	}
+
+	.grid-container aside.hidden {
+		display: none;
+	}
+
+	.grid-container main {
+		grid-row: 2;
+		grid-column: 2;
+		background-color: white;
+		border: 1px solid #d1d5db;
+		padding: 1rem;
+		border-radius: 0.375rem;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	}
+
+	.grid-container footer {
+		grid-column: 1 / -1;
+		background-color: #f3f4f6;
+		border: 1px solid #d1d5db;
+		padding: 1.5rem;
+		border-radius: 0.375rem;
+		text-align: right;
+		font-size: 0.75rem;
+	}
+
+	/* Menu toggle button styles */
+	.menu-toggle-btn {
+		cursor: pointer;
+	}
+
+	.menu-toggle-btn:hover {
+		background-color: #e5e7eb;
+	}
+
+	/* Menu overlay styles */
+	.menu-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, 0.5);
+		z-index: 40;
+		transition: opacity 0.3s ease-in-out;
+	}
+
+	.menu-overlay.hidden {
+		display: none;
+	}
+
+	/* Modal menu styles */
+	.menu-modal {
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: 250px;
+		height: 100vh;
+		z-index: 50;
+		background-color: #f9fafb;
+		border: 1px solid #d1d5db;
+		padding: 1rem;
+		overflow-y: auto;
+		box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+		transition: transform 0.3s ease-in-out;
+	}
+
+	.menu-modal.hidden {
+		display: none;
+		transform: translateX(-100%);
+	}
+
+/* When menu is collapsed on desktop, make main occupy full width */
+.grid-container.menu-collapsed {
+    grid-template-columns: 1fr;
+}
+
+/* When menu is collapsed ensure aside is removed from layout and main stays in row 2 column 1
+   so footer remains at the bottom (prevents implicit column creation). */
+.grid-container.menu-collapsed aside {
+	display: none;
+}
+
+.grid-container.menu-collapsed main {
+	grid-column: 1;
+}
+
+	/* Tablet and phone view (max-width: 1024px) */
+	@media (max-width: 1024px) {
+		.grid-container {
+			grid-template-columns: 1fr;
+		}
+
+		.grid-container aside {
+			grid-column: auto;
+			grid-row: auto;
+		}
+
+		.grid-container main {
+			grid-column: 1;
+		}
+	}
+
+	/* Phone view (max-width: 768px) */
+	@media (max-width: 768px) {
+		.grid-container {
+			grid-template-columns: 1fr;
+			padding: 0.75rem;
+			gap: 0.75rem;
+		}
+
+		.grid-container header {
+			padding: 1rem;
+		}
+
+		.grid-container main {
+			grid-column: 1;
+		}
+
+		.grid-container footer {
+			grid-column: 1;
+		}
+	}

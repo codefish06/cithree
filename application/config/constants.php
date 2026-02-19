@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | application for versioning, logging, and informational purposes.
 |
 */
-defined('APP_NAME')    OR define('APP_NAME', 'cithree');
+defined('APP_NAME')    OR define('APP_NAME', 'Coal');
 defined('APP_VERSION') OR define('APP_VERSION', '1.0.0');
 defined('APP_BUILD')   OR define('APP_BUILD', '001');
 
