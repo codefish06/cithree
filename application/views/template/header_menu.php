@@ -31,17 +31,40 @@
 <!-- Menu overlay for tablet/mobile -->
 <div id="menu-overlay" class="menu-overlay hidden"></div>
 
-<aside id="menu-sidebar" class="menu-sidebar">
-    <h2 class="text-lg font-semibold text-gray-700 mb-4">Navigation</h2>
-    <ul class="space-y-2">
-        <li><a href="/" class="text-blue-600 hover:text-orange-700">Home</a></li>
-        <li>
-            <a href="/vendor" class="text-blue-600 hover:text-orange-700 flex items-center">Vendor</a>
-            <ul class="ml-6 mt-2 space-y-1 border-l-2 border-gray-300 pl-3">
-                <li><a href="/vendor/select2" class="text-blue-600 hover:text-orange-700 flex items-center text-sm">Select2</a></li>
+<aside id="menu-sidebar" class="inset-y-0 left-0 bg-white border-r border-gray-200 shadow-lg z-30 transform transition-transform duration-200 lg:translate-x-0" aria-label="Sidebar">
+    <div class="h-full overflow-y-auto p-4">
+        <nav>
+            <ul class="space-y-1">
+                <li>
+                    <a href="/" class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                        <span>Home</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <button class="w-full flex items-center justify-between gap-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100 submenu-toggle" aria-expanded="false" data-target="submenu-vendor">
+                        <span class="flex items-center gap-3">
+                            <span>Vendor</span>
+                        </span>
+                        <svg class="w-4 h-4 text-gray-400 transition-transform duration-150" data-chevron viewBox="0 0 20 20" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 8l4 4 4-4"/></svg>
+                    </button>
+                    <ul id="submenu-vendor" class="mt-1 ml-6 space-y-1 hidden">
+                        <li>
+                            <a href="/vendor" class="block px-3 py-2 rounded-md text-sm text-gray-600 hover:bg-gray-100">All</a>
+                        <li>
+                            <a href="/vendor/select2" class="block px-3 py-2 rounded-md text-sm text-gray-600 hover:bg-gray-100">Select2</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="/appearance" class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                        <span>Appearance</span>
+                    </a>
+                </li>
             </ul>
-        </li>
-    </ul>
+        </nav>
+    </div>
 </aside>
 
 <script>
@@ -79,6 +102,28 @@ document.addEventListener('DOMContentLoaded', function() {
         const isHidden = menuSidebar.classList.contains('hidden');
         localStorage.setItem('menuHidden', isHidden);
     });
+
+    // Submenu toggle handling for multi-level sidebar
+    function setupSubmenus() {
+        const toggles = document.querySelectorAll('.submenu-toggle');
+        toggles.forEach(btn => {
+            const targetId = btn.getAttribute('data-target');
+            const submenu = document.getElementById(targetId);
+            const chevron = btn.querySelector('[data-chevron]');
+            // Ensure initial aria state
+            btn.setAttribute('aria-expanded', 'false');
+
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const isOpen = !submenu.classList.contains('hidden');
+                submenu.classList.toggle('hidden');
+                btn.setAttribute('aria-expanded', String(!isOpen));
+                if (chevron) chevron.style.transform = !isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+            });
+        });
+    }
+
+    setupSubmenus();
     
     // Auto-hide menu on tablet and phone
     function handleResponsive() {
