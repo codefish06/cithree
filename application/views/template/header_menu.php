@@ -10,17 +10,17 @@
         </button>
         <h1 class="text-2xl font-bold text-gray-700 flex items-center gap-3">
             <svg role="img" aria-labelledby="coalLogoTitle" class="w-8 h-8" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <title id="coalLogoTitle">Coal - cola can logo</title>
+                <title id="coalLogoTitle">Coal - charcoal logo</title>
                 <defs>
-                    <linearGradient id="canGrad" x1="0" x2="1" y1="0" y2="1">
-                        <stop offset="0%" stop-color="#E53935"/>
-                        <stop offset="100%" stop-color="#B71C1C"/>
-                    </linearGradient>
+                    <radialGradient id="charcoalGrad" cx="40%" cy="40%">
+                        <stop offset="0%" stop-color="#4B5563"/>
+                        <stop offset="100%" stop-color="#1F2937"/>
+                    </radialGradient>
                 </defs>
-                <rect x="10" y="6" width="44" height="52" rx="6" fill="url(#canGrad)" stroke="#7f1d1d" stroke-width="1"/>
-                <rect x="18" y="12" width="28" height="6" rx="3" fill="#fff" opacity="0.12"/>
-                <path d="M16 20c0 8 0 24 0 24h32s0-16 0-24c0-8-32-8-32 0z" fill="rgba(255,255,255,0.06)"/>
-                <text x="32" y="38" font-family="Inter, Arial, sans-serif" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">Coal</text>
+                <circle cx="20" cy="20" r="8" fill="url(#charcoalGrad)" stroke="#111827" stroke-width="0.5"/>
+                <circle cx="42" cy="18" r="7" fill="url(#charcoalGrad)" opacity="0.9" stroke="#111827" stroke-width="0.5"/>
+                <circle cx="32" cy="38" r="9" fill="url(#charcoalGrad)" stroke="#111827" stroke-width="0.5"/>
+                <circle cx="52" cy="36" r="6" fill="url(#charcoalGrad)" opacity="0.85" stroke="#111827" stroke-width="0.5"/>
             </svg>
             <span><?php echo defined('APP_NAME') ? APP_NAME : 'Coal'; ?></span>
         </h1>

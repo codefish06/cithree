@@ -7,5 +7,4 @@ class Appearance extends CI_Controller {
     {
         $this->load->view('appearance/index');
     }
-
 }   

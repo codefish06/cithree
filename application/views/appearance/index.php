@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Vendor Testing - <?php echo APP_NAME; ?></title>
+	<title>Appearance - <?php echo APP_NAME; ?></title>
 	<link href="<?php echo base_url('application/assets/css/output.css'); ?>" rel="stylesheet">
 	<link href="<?php echo base_url('application/assets/css/grid-layout.css'); ?>" rel="stylesheet">
 </head>
@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-6 border border-gray-200">
                 <h3 class="text-lg font-semibold text-gray-900 mb-2">Content Blocks</h3>
                 <p class="text-gray-600 text-sm mb-4">Manage reusable content sections and widgets.</p>
-                <a href="<?php echo base_url('appearance/blocks'); ?>" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold">Manage Blocks →</a>
+                <a href="<?php echo base_url('content_block'); ?>" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold">Manage Blocks →</a>
             </div>
         </div>
     </div>

@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Vendor Testing - <?php echo APP_NAME; ?></title>
+	<title>Vendors - <?php echo APP_NAME; ?></title>
 	<link href="<?php echo base_url('application/assets/css/output.css'); ?>" rel="stylesheet">
 	<link href="<?php echo base_url('application/assets/css/grid-layout.css'); ?>" rel="stylesheet">
 </head>
