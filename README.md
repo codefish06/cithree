@@ -157,14 +157,14 @@ composer install
 npm install
 ```
 
-### 4. Build Tailwind CSS
+### 4. Build CSS Assets
 
-For production build:
+For CSS status/info:
 ```bash
 npm run build:css
 ```
 
-For development with watch mode (recompiles on file changes):
+For watch command guidance:
 ```bash
 npm run watch:css
 ```
@@ -182,41 +182,39 @@ Configure your web server (Apache/Nginx) to point to the project root directory.
 ### 7. Start Development
 
 - Access your application at `http://localhost/coal/` (adjust based on your setup)
-- Keep the Tailwind CSS watch process running: `npm run watch:css`
-- Modify views and Tailwind classes as needed
+- CSS is maintained in `application/assets/css/output.css`
+- Modify views and CSS classes as needed
 
 ## Project Dependencies
 
 ### Node Packages (Frontend)
-- **tailwindcss** (^4.1.18) - Utility-first CSS framework
 - **jquery** (^4.0.0) - JavaScript library
 - **select2** (^4.1.0-rc.0) - jQuery plugin for enhanced select boxes
 
 ### Scripts
 
-- `npm run build:css` - Compiles Tailwind CSS from `application/assets/css/input.css` to `application/assets/css/output.css`
-- `npm run watch:css` - Watches for CSS changes and automatically recompiles
+- `npm run build:css` - Prints CSS workflow info for the vanilla CSS setup
+- `npm run watch:css` - Prints watch workflow info for the vanilla CSS setup
 - `npm run copy-asset:select2` - Copies Select2 vendor files to assets
 - `npm run copy-asset:jquery` - Copies jQuery vendor files to assets
 
-## Tailwind CSS Integration
+## CSS Styling Approach
 
-This project uses **Tailwind CSS v4** for styling. The configuration is handled through:
+This project uses hand-authored vanilla CSS utilities and component styles. The styling files are:
 
-- **Input file**: `application/assets/css/input.css`
-- **Output file**: `application/assets/css/output.css` (compiled)
-- **Config file**: `tailwind.config.js` (root directory)
+- **Primary stylesheet**: `application/assets/css/output.css`
+- **Layout stylesheet**: `application/assets/css/grid-layout.css`
 
-All views are styled using Tailwind utility classes instead of inline CSS.
+Views use utility-like class names backed by local CSS (no Tailwind runtime/build dependency).
 
 ## Getting Started
 
 1. Clone or download this repository (see Installation & Setup section above)
 2. Install dependencies: `npm install` and `composer install`
-3. Build CSS: `npm run build:css`
+3. Review CSS workflow info: `npm run build:css`
 4. Configure your web server to point to the project root
 5. Update `application/config/config.php` and `application/config/database.php` as needed
-6. Start the Tailwind watch process: `npm run watch:css` (optional, for development)
+6. Start CSS watch workflow guidance: `npm run watch:css` (optional)
 7. Begin building your application in the `application/` directory
 
 ## License

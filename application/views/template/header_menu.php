@@ -1,15 +1,15 @@
 <header>
-    <div class="flex items-center">
-        <button id="menu-toggle" class="menu-toggle-btn p-2 rounded hover:bg-gray-200 transition-colors" title="Toggle Menu">
-            <svg id="menu-icon" class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="header-row">
+        <button id="menu-toggle" class="menu-toggle-btn" title="Toggle Menu">
+            <svg id="menu-icon" class="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
-            <svg id="close-icon" class="w-6 h-6 text-gray-700 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg id="close-icon" class="menu-icon is-hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
             </svg>
         </button>
-        <h1 class="text-2xl font-bold text-gray-700 flex items-center gap-3">
-            <svg role="img" aria-labelledby="coalLogoTitle" class="w-8 h-8" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <h1 class="brand-title">
+            <svg role="img" aria-labelledby="coalLogoTitle" class="brand-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                 <title id="coalLogoTitle">Coal - charcoal logo</title>
                 <defs>
                     <radialGradient id="charcoalGrad" cx="40%" cy="40%">
@@ -29,36 +29,36 @@
 </header>
 
 <!-- Menu overlay for tablet/mobile -->
-<div id="menu-overlay" class="menu-overlay hidden"></div>
+<div id="menu-overlay" class="menu-overlay is-hidden"></div>
 
-<aside id="menu-sidebar" class="inset-y-0 left-0 bg-white border-r border-gray-200 shadow-lg z-30 transform transition-transform duration-200 lg:translate-x-0" aria-label="Sidebar">
-    <div class="h-full overflow-y-auto p-4">
+<aside id="menu-sidebar" class="menu-sidebar" aria-label="Sidebar">
+    <div class="sidebar-inner">
         <nav>
-            <ul class="space-y-1">
+            <ul class="sidebar-list">
                 <li>
-                    <a href="/" class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    <a href="/" class="sidebar-link">
                         <span>Home</span>
                     </a>
                 </li>
 
-                <li class="">
-                    <button class="w-full flex items-center justify-between gap-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100 submenu-toggle" aria-expanded="false" data-target="submenu-vendor">
-                        <span class="flex items-center gap-3">
+                <li>
+                    <button class="sidebar-button submenu-toggle" aria-expanded="false" data-target="submenu-vendor">
+                        <span class="sidebar-button-label">
                             <span>Vendor</span>
                         </span>
-                        <svg class="w-4 h-4 text-gray-400 transition-transform duration-150" data-chevron viewBox="0 0 20 20" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 8l4 4 4-4"/></svg>
+                        <svg class="chevron-icon" data-chevron viewBox="0 0 20 20" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 8l4 4 4-4"/></svg>
                     </button>
-                    <ul id="submenu-vendor" class="mt-1 ml-6 space-y-1 hidden">
+                    <ul id="submenu-vendor" class="sidebar-submenu is-hidden">
                         <li>
-                            <a href="/vendor" class="block px-3 py-2 rounded-md text-sm text-gray-600 hover:bg-gray-100">All</a>
+                            <a href="/vendor" class="sidebar-sublink">All</a>
                         <li>
-                            <a href="/vendor/select2" class="block px-3 py-2 rounded-md text-sm text-gray-600 hover:bg-gray-100">Select2</a>
+                            <a href="/vendor/select2" class="sidebar-sublink">Select2</a>
                         </li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="/appearance" class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    <a href="/appearance" class="sidebar-link">
                         <span>Appearance</span>
                     </a>
                 </li>
@@ -78,9 +78,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check if menu is hidden in localStorage
     const isMenuHidden = localStorage.getItem('menuHidden') === 'true';
     if (isMenuHidden) {
-        menuSidebar.classList.add('hidden');
-        menuIcon.classList.remove('hidden');
-        closeIcon.classList.add('hidden');
+        menuSidebar.classList.add('is-hidden');
+        menuIcon.classList.remove('is-hidden');
+        closeIcon.classList.add('is-hidden');
         if (gridContainer) gridContainer.classList.add('menu-collapsed');
     } else {
         if (gridContainer) gridContainer.classList.remove('menu-collapsed');
@@ -88,18 +88,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Toggle menu visibility
     menuToggle.addEventListener('click', function() {
-        menuSidebar.classList.toggle('hidden');
-        menuIcon.classList.toggle('hidden');
-        closeIcon.classList.toggle('hidden');
+        menuSidebar.classList.toggle('is-hidden');
+        menuIcon.classList.toggle('is-hidden');
+        closeIcon.classList.toggle('is-hidden');
 
         // On desktop, make main occupy remaining space when menu hidden
         if (gridContainer && window.innerWidth >= 1024) {
-            const isHidden = menuSidebar.classList.contains('hidden');
+            const isHidden = menuSidebar.classList.contains('is-hidden');
             gridContainer.classList.toggle('menu-collapsed', isHidden);
         }
 
         // Save preference to localStorage
-        const isHidden = menuSidebar.classList.contains('hidden');
+        const isHidden = menuSidebar.classList.contains('is-hidden');
         localStorage.setItem('menuHidden', isHidden);
     });
 
@@ -115,8 +115,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
-                const isOpen = !submenu.classList.contains('hidden');
-                submenu.classList.toggle('hidden');
+                const isOpen = !submenu.classList.contains('is-hidden');
+                submenu.classList.toggle('is-hidden');
                 btn.setAttribute('aria-expanded', String(!isOpen));
                 if (chevron) chevron.style.transform = !isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
             });
@@ -133,10 +133,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isSmallScreen) {
             // On mobile/tablet, use modal behavior and ensure menu is hidden
             menuSidebar.classList.add('menu-modal');
-            menuSidebar.classList.add('hidden');
-            menuIcon.classList.remove('hidden');
-            closeIcon.classList.add('hidden');
-            menuOverlay.classList.add('hidden');
+            menuSidebar.classList.add('is-hidden');
+            menuIcon.classList.remove('is-hidden');
+            closeIcon.classList.add('is-hidden');
+            menuOverlay.classList.add('is-hidden');
             if (gridContainer) gridContainer.classList.remove('menu-collapsed');
             localStorage.setItem('menuHidden', 'true');
         } else {
@@ -144,44 +144,44 @@ document.addEventListener('DOMContentLoaded', function() {
             menuSidebar.classList.remove('menu-modal');
             const storedHidden = localStorage.getItem('menuHidden') === 'true';
             if (storedHidden) {
-                menuSidebar.classList.add('hidden');
-                menuIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
+                menuSidebar.classList.add('is-hidden');
+                menuIcon.classList.remove('is-hidden');
+                closeIcon.classList.add('is-hidden');
                 if (gridContainer) gridContainer.classList.add('menu-collapsed');
             } else {
-                menuSidebar.classList.remove('hidden');
-                menuIcon.classList.add('hidden');
-                closeIcon.classList.remove('hidden');
+                menuSidebar.classList.remove('is-hidden');
+                menuIcon.classList.add('is-hidden');
+                closeIcon.classList.remove('is-hidden');
                 if (gridContainer) gridContainer.classList.remove('menu-collapsed');
             }
-            menuOverlay.classList.add('hidden');
+            menuOverlay.classList.add('is-hidden');
         }
     }
     
     // Close menu when overlay is clicked
     const menuOverlay = document.getElementById('menu-overlay');
     menuOverlay.addEventListener('click', function() {
-        menuSidebar.classList.add('hidden');
-        menuIcon.classList.remove('hidden');
-        closeIcon.classList.add('hidden');
-        menuOverlay.classList.add('hidden');
+        menuSidebar.classList.add('is-hidden');
+        menuIcon.classList.remove('is-hidden');
+        closeIcon.classList.add('is-hidden');
+        menuOverlay.classList.add('is-hidden');
         localStorage.setItem('menuHidden', 'true');
     });
     
     // Update overlay state when menu is toggled
     const originalToggle = menuToggle.onclick;
     menuToggle.addEventListener('click', function() {
-        const isHidden = menuSidebar.classList.contains('hidden');
+        const isHidden = menuSidebar.classList.contains('is-hidden');
         if (!isHidden && window.innerWidth < 1024) {
-            menuOverlay.classList.remove('hidden');
+            menuOverlay.classList.remove('is-hidden');
         } else if (isHidden && window.innerWidth < 1024) {
-            menuOverlay.classList.add('hidden');
+            menuOverlay.classList.add('is-hidden');
         }
     });
     
     // Update overlay visibility on first load
     if (!isMenuHidden && window.innerWidth < 1024) {
-        menuOverlay.classList.remove('hidden');
+        menuOverlay.classList.remove('is-hidden');
     }
     
     // Initial check

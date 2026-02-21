@@ -12,22 +12,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link href="<?php echo base_url('application/assets/css/grid-layout.css'); ?>" rel="stylesheet">	
 
 </head>
-<body class="bg-white text-gray-600 font-sans">
+<body class="app-body">
 
 <div class="grid-container">
 	<?php $this->load->view('template/header_menu'); ?>
 	<main>
-	<h1 class="text-2xl font-normal text-gray-700 border-b border-gray-300 p-4 pb-2 mb-5">Select2 Vendor Testing</h1>
+	<h1 class="page-title">Select2 Vendor Testing</h1>
 
-	<div class="mx-4 my-6">
-		<p class="mb-2">This page demonstrates Select2 functionality - a jQuery plugin for enhanced select boxes with search and tagging capabilities.</p>
+	<div class="page-content">
+		<p class="text-block">This page demonstrates Select2 functionality - a jQuery plugin for enhanced select boxes with search and tagging capabilities.</p>
 
-		<h2 class="text-gray-600 text-base font-normal my-5 py-0">Select2 Examples</h2>
+		<h2 class="section-label">Select2 Examples</h2>
 
 		<form>
-			<div class="mb-5 p-4 bg-gray-100 border border-gray-200 rounded">
-				<label for="singleSelect" class="block mb-2 font-bold text-gray-900">Basic Single Select</label>
-				<select id="singleSelect" class="form-control w-full" style="width: 100%;">
+			<div class="form-panel">
+				<label for="singleSelect" class="form-label">Basic Single Select</label>
+				<select id="singleSelect" class="form-control" style="width: 100%;">
 					<option></option>
 					<option value="1">Option 1</option>
 					<option value="2">Option 2</option>
@@ -35,9 +35,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<option value="4">Option 4</option>
 				</select>
 			</div>
-			<div class="mb-5 p-4 bg-gray-100 border border-gray-200 rounded">
-				<label for="singleCustomSelect" class="block mb-2 font-bold text-gray-900">Single Custom Select</label>
-				<select id="singleCustomSelect" class="form-control w-full" style="width: 100%;">
+			<div class="form-panel">
+				<label for="singleCustomSelect" class="form-label">Single Custom Select</label>
+				<select id="singleCustomSelect" class="form-control" style="width: 100%;">
 					<option></option>
 					<option value="1">Option 1</option>
 					<option value="2">Option 2</option>
@@ -45,9 +45,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<option value="4">Option 4</option>
 				</select>
 			</div>
-			<div class="mb-5 p-4 bg-gray-100 border border-gray-200 rounded">
-				<label for="multipleSelect" class="block mb-2 font-bold text-gray-900">Multiple Select</label>
-				<select id="multipleSelect" class="form-control w-full" multiple="multiple" style="width: 100%;">
+			<div class="form-panel">
+				<label for="multipleSelect" class="form-label">Multiple Select</label>
+				<select id="multipleSelect" class="form-control" multiple="multiple" style="width: 100%;">
 					<option value="1">Option 1</option>
 					<option value="2">Option 2</option>
 					<option value="3">Option 3</option>
@@ -55,9 +55,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<option value="5">Option 5</option>
 				</select>
 			</div>
-            <div class="mb-5 p-4 bg-gray-100 border border-gray-200 rounded">
-                <label for="tagsSelect" class="block mb-2 font-bold text-gray-900">Tagging Support</label>
-                <select id="tagsSelect" class="form-control w-full" multiple="multiple" style="width: 100%;">
+            <div class="form-panel">
+                <label for="tagsSelect" class="form-label">Tagging Support</label>
+                <select id="tagsSelect" class="form-control" multiple="multiple" style="width: 100%;">
                     <option value="Tag1">Tag1</option>
                     <option value="Tag2">Tag2</option>
                     <option value="Tag3">Tag3</option>
@@ -65,7 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
 		</form>
 
-		<p class="mb-2"><a href="<?php echo base_url('vendor'); ?>" class="text-blue-600 hover:text-orange-700">Back to Vendor Testing</a></p>
+		<p class="text-block"><a href="<?php echo base_url('vendor'); ?>" class="link-primary">Back to Vendor Testing</a></p>
 	</div>
 	</main>
 	<?php $this->load->view('template/footer'); ?>	
