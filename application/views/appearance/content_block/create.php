@@ -36,11 +36,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <svg class="w-6 h-6 text-orange-600" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2H4a1 1 0 110-2V4z"></path></svg>
                         <p class="font-semibold text-orange-600 text-sm">Paragraph</p>
                     </div>
+                    <div class="block-item p-4 bg-gray-50 border-2 border-gray-300 rounded cursor-move hover:bg-gray-100 flex flex-col items-center gap-2" draggable="true" data-type="divider">
+                        <svg class="w-6 h-6 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"></path></svg>
+                        <p class="font-semibold text-gray-600 text-sm">Divider</p>
+                    </div>
                 </div>
 
                 <h3 class="text-xl font-semibold mb-4 text-gray-700">Canvas</h3>
-                <div id="canvas" class="grid grid-cols-2 gap-4 p-6 bg-gray-50 border-2 border-dashed border-gray-400 rounded min-h-96">
-                    <p class="col-span-2 text-gray-400 text-center">Drag blocks here to build your content</p>
+                <div id="canvas" class="grid p-1 bg-gray-50 border-1 border-dashed border-gray-400 rounded min-h-96">
                 </div>
 
                 <h3 class="text-xl font-semibold mt-6 mb-2 text-gray-700">Generated HTML</h3>
@@ -125,14 +128,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         });
 
         function addBlockToCanvas(type) {
+            const row = document.createElement('div');
+            row.className = 'row quick-drag';
+            
             const block = createBlock(type);
-            canvas.appendChild(block);
+            row.appendChild(block);
+            canvas.appendChild(row);
             updateHtmlOutput();
         }
 
         function createBlock(type) {
             const div = document.createElement('div');
-            div.className = 'canvas-block p-4 bg-gray-100 border border-gray-300 relative group';
+            div.className = 'canvas-block p-4 border border-gray-300 relative group';
             div.innerHTML = `<button class="delete-btn absolute top-1 right-1 hidden group-hover:block bg-red-500 text-white px-2 py-1 rounded text-sm">×</button>`;
 
             if (type === 'button') {
@@ -143,10 +150,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 div.innerHTML += '<img src="https://via.placeholder.com/300" alt="Image" class="max-w-full">';
             } else if (type === 'paragraph') {
                 div.innerHTML += '<p class="text-gray-600">Paragraph content goes here...</p>';
+            } else if (type === 'divider') {
+                div.innerHTML += '<hr class="border-gray-400">';
             }
 
             div.querySelector('.delete-btn').addEventListener('click', function() {
-                div.remove();
+                div.parentElement.remove();
                 updateHtmlOutput();
             });
 
