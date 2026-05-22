@@ -9,8 +9,8 @@
 
 	.grid-container header {
 		grid-column: 1 / -1;
-		background-color: #f3f4f6;
-		border: 1px solid #d1d5db;
+		background-color: var(--surface-header);
+		border: 1px solid var(--border-default);
 		padding: .5rem;
 		border-radius: 0.375rem;
 	}
@@ -18,8 +18,8 @@
 	.grid-container aside {
 		grid-row: 2;
 		grid-column: 1;
-		background-color: #f9fafb;
-		border: 1px solid #d1d5db;
+		background-color: var(--surface-sidebar);
+		border: 1px solid var(--border-default);
 		padding: 1rem;
 		border-radius: 0.375rem;
 		transition: all 0.3s ease-in-out;
@@ -32,11 +32,11 @@
 	.grid-container main {
 		grid-row: 2;
 		grid-column: 2;
-		background-color: white;
-		border: 1px solid #d1d5db;
+		background-color: var(--surface-main);
+		border: 1px solid var(--border-default);
 		padding: 1rem;
 		border-radius: 0.375rem;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+		box-shadow: var(--shadow-soft);
 	}
 
 	.grid-container footer {
@@ -45,6 +45,7 @@
 		border-radius: 0.375rem;
 		text-align: right;
 		font-size: 0.75rem;
+		color: var(--text-muted);
 	}
 
 	/* Menu toggle button styles */
@@ -53,7 +54,7 @@
 	}
 
 	.menu-toggle-btn:hover {
-		background-color: #e5e7eb;
+		background-color: var(--surface-muted);
 	}
 
 	/* Menu overlay styles */
@@ -63,7 +64,7 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background-color: rgba(0, 0, 0, 0.5);
+		background-color: var(--overlay-backdrop);
 		z-index: 40;
 		transition: opacity 0.3s ease-in-out;
 	}
@@ -80,8 +81,8 @@
 		width: 250px;
 		height: 100vh;
 		z-index: 50;
-		background-color: #f9fafb;
-		border: 1px solid #d1d5db;
+		background-color: var(--surface-sidebar);
+		border: 1px solid var(--border-default);
 		padding: 1rem;
 		overflow-y: auto;
 		box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);

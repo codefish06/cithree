@@ -161,7 +161,7 @@ a:hover {
 .sidebar-sublink {
   display: block;
   font-size: 0.875rem;
-  color: var(--slate-600);
+  color: var(--slagmate-600);
 }
 
 .chevron-icon {

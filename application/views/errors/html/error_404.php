@@ -12,5 +12,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<h1 class="error-title"><?php echo $heading; ?></h1>
 		<div class="error-content"><?php echo $message; ?></div>
 	</div>
+<script src="<?php echo base_url('application/assets/js/theme.js'); ?>"></script>
 </body>
 </html>
