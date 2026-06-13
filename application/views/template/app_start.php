@@ -28,51 +28,21 @@ $strActiveNav = isset($active_nav) ? (string) $active_nav : '';
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <a class="app-topbar-brand" href="<?php echo site_url(); ?>">
-                    <span class="app-brand-badge">B</span>
-                    <span class="d-none d-sm-inline"><?php echo htmlspecialchars(APP_NAME, ENT_QUOTES, 'UTF-8'); ?></span>
+                    <span class="app-brand-badge" aria-hidden="true">
+                        <svg class="bi" width="18" height="18" viewBox="0 0 16 16">
+                            <path d="M6.5 0A2.5 2.5 0 0 0 4 2.5V4H2.5A2.5 2.5 0 0 0 0 6.5v3A2.5 2.5 0 0 0 2.5 12H4v1.5A2.5 2.5 0 0 0 6.5 16h3a2.5 2.5 0 0 0 2.5-2.5V12h1.5A2.5 2.5 0 0 0 16 9.5v-3A2.5 2.5 0 0 0 13.5 4H12V2.5A2.5 2.5 0 0 0 9.5 0h-3zM5 2.5A1.5 1.5 0 0 1 6.5 1h3A1.5 1.5 0 0 1 11 2.5V4H5V2.5zM1 6.5A1.5 1.5 0 0 1 2.5 5h11A1.5 1.5 0 0 1 15 6.5v3A1.5 1.5 0 0 1 13.5 11h-11A1.5 1.5 0 0 1 1 9.5v-3zM5 12h6v1.5A1.5 1.5 0 0 1 9.5 15h-3A1.5 1.5 0 0 1 5 13.5V12z"></path>
+                        </svg>
+                    </span>
+                    <span><?php echo htmlspecialchars(APP_NAME, ENT_QUOTES, 'UTF-8'); ?></span>
                 </a>
-                <nav class="app-topbar-nav d-none d-lg-flex" aria-label="Primary">
-                    <a href="<?php echo site_url(); ?>" class="app-topbar-link<?php echo $strActiveNav === 'home' ? ' active' : ''; ?>">Docs</a>
-                    <a href="<?php echo site_url('bootstrap_examples'); ?>" class="app-topbar-link<?php echo $strActiveNav === 'bootstrap_examples' ? ' active' : ''; ?>">Examples</a>
-                    <a href="<?php echo site_url('appearance'); ?>" class="app-topbar-link<?php echo $strActiveNav === 'appearance' ? ' active' : ''; ?>">UI</a>
-                    <a href="<?php echo site_url('vendor'); ?>" class="app-topbar-link<?php echo $strActiveNav === 'vendor' || $strActiveNav === 'vendor_select2' ? ' active' : ''; ?>">Integrations</a>
-                </nav>
             </div>
 
-            <form class="app-topbar-search d-none d-md-flex" role="search">
-                <span class="app-topbar-search-icon" aria-hidden="true">
-                    <svg class="bi" width="16" height="16" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.398 1.398l3.85 3.85.707-.707-3.85-3.85zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
-                    </svg>
-                </span>
-                <input type="search" class="form-control" placeholder="Search" aria-label="Search">
-                <span class="app-topbar-shortcut">⌘ K</span>
-            </form>
-
             <div class="app-topbar-actions">
-                <a href="<?php echo site_url('bootstrap_examples'); ?>" class="app-topbar-icon-link d-none d-lg-inline-flex" title="Bootstrap Examples">
-                    <svg class="bi" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-                        <path d="M2 1h12v3H2V1zm0 5h5v9H2V6zm7 0h5v4H9V6zm0 6h5v3H9v-3z"></path>
-                    </svg>
-                </a>
-                <a href="https://getbootstrap.com/docs/5.3/" target="_blank" rel="noopener noreferrer" class="app-topbar-icon-link d-none d-lg-inline-flex" title="Bootstrap Docs">
-                    <svg class="bi" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-                        <path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8c1.77 0 3.4-.58 4.72-1.56l-2.03-1.7A4.98 4.98 0 0 1 8 13a5 5 0 1 1 4.9-6h-2.15l2.86 3.5L16 7h-2.09A6 6 0 0 0 8 0z"></path>
-                    </svg>
-                </a>
-                <div class="dropdown d-none d-lg-block">
-                    <button class="app-topbar-version dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        v5.3
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><span class="dropdown-item-text">Bootstrap 5.3 reference</span></li>
-                    </ul>
-                </div>
                 <button type="button" class="app-topbar-theme" data-theme-toggle="true" aria-pressed="false">
                     <svg class="bi" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
                         <path d="M8 1a.5.5 0 0 1 .5.5V3a.5.5 0 0 1-1 0V1.5A.5.5 0 0 1 8 1zm0 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 1a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm5-4a.5.5 0 0 1 .5-.5H15a.5.5 0 0 1 0 1h-1.5A.5.5 0 0 1 13 8zM1 8a.5.5 0 0 1 .5-.5H3a.5.5 0 0 1 0 1H1.5A.5.5 0 0 1 1 8zm10.657-4.657a.5.5 0 0 1 .707 0l1.06 1.06a.5.5 0 1 1-.707.708l-1.06-1.061a.5.5 0 0 1 0-.707zm-8.485 8.485a.5.5 0 0 1 .707 0l1.06 1.06a.5.5 0 0 1-.707.708l-1.06-1.06a.5.5 0 0 1 0-.708zm9.545.707a.5.5 0 0 1 0-.707l1.06-1.06a.5.5 0 1 1 .707.707l-1.06 1.06a.5.5 0 0 1-.707 0zM3.879 4.05a.5.5 0 0 1 0-.708L4.94 2.282a.5.5 0 1 1 .707.707L4.586 4.05a.5.5 0 0 1-.707 0z"></path>
                     </svg>
-                    <span class="visually-hidden" data-theme-label>Dark</span>
+                    <span class="app-topbar-theme-label" data-theme-label>Dark</span>
                 </button>
             </div>
         </div>
