@@ -23,32 +23,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost:8005/';
+$is_cli_request = (PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg');
+$request_is_https = (
+	! empty($_SERVER['HTTPS'])
+	&& $_SERVER['HTTPS'] !== 'off'
+)
+	|| (isset($_SERVER['SERVER_PORT']) && (int) $_SERVER['SERVER_PORT'] === 443)
+	|| (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
 
-/*
-|---------------------------------------------------------------------------
-| Alternative Base URL Setup Methods
-|--------------------------------------------------------------------------
-|
-|   TODO: Consider using .env file for base URL configuration
-    
-    Option 4: Using .env file (Modern approach)
-    First, install vlucas/phpdotenv via composer:
-    bashcomposer require vlucas/phpdotenv
-    In index.php (before loading CodeIgniter):
-    phprequire_once __DIR__ . '/vendor/autoload.php';
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-    $dotenv->load();
-    ```
-
-    Create `.env` file in project root:
-    ```
-    BASE_URL=http://localhost:8005/
-    In config.php:
-    php$config['base_url'] = getenv('BASE_URL') ?: 'http://localhost/';
-|
-|--------------------------------------------------------------------------
-*/
+if (ENVIRONMENT === 'development' && ! $is_cli_request)
+{
+	$scheme = $request_is_https ? 'https' : 'http';
+	$host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '127.0.0.1:8000';
+	$config['base_url'] = $scheme.'://'.$host.'/';
+}
+else
+{
+	$config['base_url'] = 'http://127.0.0.1:8000/';
+}
 
 /*
 |--------------------------------------------------------------------------

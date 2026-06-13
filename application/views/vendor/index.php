@@ -1,51 +1,44 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Vendor Testing - <?php echo APP_NAME; ?></title>
-	<link href="<?php echo base_url('application/assets/css/output.css'); ?>" rel="stylesheet">
-	<link href="<?php echo base_url('application/assets/css/grid-layout.css'); ?>" rel="stylesheet">
-</head>
-<body class="bg-white text-gray-600 font-sans">
 
-<div class="grid-container">
-	<?php $this->load->view('template/header_menu'); ?>
-	<main>
-	<h1 class="text-2xl font-normal text-gray-700 border-b border-gray-300 p-4 pb-2 mb-5">Vendor Package Testing</h1>
+$page_title = 'Vendor Packages';
+$active_nav = 'vendor';
+$this->load->view('template/app_start');
+?>
 
-	<div class="mx-4 my-6">
-		<p class="mb-2">This page provides a comprehensive listing of all third-party vendor packages integrated and tested in this application.</p>
-
-		<h2 class="text-gray-600 text-base font-normal my-5 py-0">Vendor Packages</h2>
-		
-		<table class="w-full border-collapse my-5">
-			<thead class="bg-gray-100 border-b-2 border-gray-300">
-				<tr>
-					<th class="p-3 text-left font-bold text-gray-900">Package Name</th>
-					<th class="p-3 text-left font-bold text-gray-900">Version</th>
-					<th class="p-3 text-left font-bold text-gray-900">Description</th>
-					<th class="p-3 text-left font-bold text-gray-900">Status</th>
-					<th class="p-3 text-left font-bold text-gray-900">Action</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="hover:bg-gray-100">
-					<td class="p-3 border-b border-gray-200">Select2</td>
-					<td class="p-3 border-b border-gray-200">4.1.0</td>
-					<td class="p-3 border-b border-gray-200">jQuery plugin for enhanced select boxes with search and tagging capabilities</td>
-					<td class="p-3 border-b border-gray-200"><span class="text-green-600 font-bold">Active</span></td>
-					<td class="p-3 border-b border-gray-200"><a href="<?php echo base_url('vendor/select2'); ?>" class="text-blue-600 hover:text-orange-700">Test</a></td>
-				</tr>
-			</tbody>
-		</table>
-
-	</div>
-	</main>
-	<?php $this->load->view('template/footer'); ?>
-
+<div class="app-page-header">
+    <p class="app-page-kicker">Integrations</p>
+    <h1 class="h2 mb-2">Vendor package testing</h1>
+    <p class="text-secondary mb-0">A consolidated view of third-party packages integrated into the application.</p>
 </div>
 
-</body>
-</html>
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">Package</th>
+                        <th scope="col">Version</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Status</th>
+                        <th scope="col" class="text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="fw-semibold">Select2</td>
+                        <td><code>4.1.0</code></td>
+                        <td>jQuery plugin for enhanced select boxes with search and tagging support.</td>
+                        <td><span class="badge text-bg-success">Active</span></td>
+                        <td class="text-end">
+                            <a href="<?php echo site_url('vendor/select2'); ?>" class="btn btn-outline-primary btn-sm">Open demo</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<?php $this->load->view('template/app_end'); ?>

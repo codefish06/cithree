@@ -1,104 +1,118 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Select2 Testing - <?php echo APP_NAME; ?></title>
-	<link href="<?php echo base_url('application/assets/css/output.css'); ?>" rel="stylesheet">
 
-	<!-- Select2 CSS -->
-	<link href="<?php echo base_url('application/assets/vendor/select2/css/select2.min.css'); ?>" rel="stylesheet" />
-	<link href="<?php echo base_url('application/assets/css/grid-layout.css'); ?>" rel="stylesheet">	
+$page_title = 'Select2 Demo';
+$active_nav = 'vendor_select2';
+$extra_styles = [
+    base_url('application/assets/vendor/select2/css/select2.min.css'),
+    base_url('application/assets/css/vendor/select2-customization.css'),
+];
+$extra_scripts = [
+    base_url('application/assets/vendor/jquery/jquery.min.js'),
+    base_url('application/assets/vendor/select2/js/select2.min.js'),
+];
+$extra_inline_scripts = [
+<<<'JS'
+document.addEventListener('DOMContentLoaded', function() {
+    if (!window.jQuery || !jQuery.fn.select2) {
+        return;
+    }
 
-</head>
-<body class="bg-white text-gray-600 font-sans">
+    jQuery('#singleSelect').select2({
+        placeholder: 'Select an option',
+        allowClear: true
+    });
 
-<div class="grid-container">
-	<?php $this->load->view('template/header_menu'); ?>
-	<main>
-	<h1 class="text-2xl font-normal text-gray-700 border-b border-gray-300 p-4 pb-2 mb-5">Select2 Vendor Testing</h1>
+    jQuery('#singleCustomSelect').select2({
+        placeholder: 'Select an option',
+        allowClear: true,
+        dropdownCssClass: 'custom-select2-dropdown'
+    });
 
-	<div class="mx-4 my-6">
-		<p class="mb-2">This page demonstrates Select2 functionality - a jQuery plugin for enhanced select boxes with search and tagging capabilities.</p>
+    jQuery('#multipleSelect').select2({
+        placeholder: 'Select options'
+    });
 
-		<h2 class="text-gray-600 text-base font-normal my-5 py-0">Select2 Examples</h2>
+    jQuery('#tagsSelect').select2({
+        placeholder: 'Select options'
+    });
+});
+JS
+];
+$this->load->view('template/app_start');
+?>
 
-		<form>
-			<div class="mb-5 p-4 bg-gray-100 border border-gray-200 rounded">
-				<label for="singleSelect" class="block mb-2 font-bold text-gray-900">Basic Single Select</label>
-				<select id="singleSelect" class="form-control w-full" style="width: 100%;">
-					<option></option>
-					<option value="1">Option 1</option>
-					<option value="2">Option 2</option>
-					<option value="3">Option 3</option>
-					<option value="4">Option 4</option>
-				</select>
-			</div>
-			<div class="mb-5 p-4 bg-gray-100 border border-gray-200 rounded">
-				<label for="singleCustomSelect" class="block mb-2 font-bold text-gray-900">Single Custom Select</label>
-				<select id="singleCustomSelect" class="form-control w-full" style="width: 100%;">
-					<option></option>
-					<option value="1">Option 1</option>
-					<option value="2">Option 2</option>
-					<option value="3">Option 3</option>
-					<option value="4">Option 4</option>
-				</select>
-			</div>
-			<div class="mb-5 p-4 bg-gray-100 border border-gray-200 rounded">
-				<label for="multipleSelect" class="block mb-2 font-bold text-gray-900">Multiple Select</label>
-				<select id="multipleSelect" class="form-control w-full" multiple="multiple" style="width: 100%;">
-					<option value="1">Option 1</option>
-					<option value="2">Option 2</option>
-					<option value="3">Option 3</option>
-					<option value="4">Option 4</option>
-					<option value="5">Option 5</option>
-				</select>
-			</div>
-            <div class="mb-5 p-4 bg-gray-100 border border-gray-200 rounded">
-                <label for="tagsSelect" class="block mb-2 font-bold text-gray-900">Tagging Support</label>
-                <select id="tagsSelect" class="form-control w-full" multiple="multiple" style="width: 100%;">
-                    <option value="Tag1">Tag1</option>
-                    <option value="Tag2">Tag2</option>
-                    <option value="Tag3">Tag3</option>
-                </select>
-            </div>
-		</form>
-
-		<p class="mb-2"><a href="<?php echo base_url('vendor'); ?>" class="text-blue-600 hover:text-orange-700">Back to Vendor Testing</a></p>
-	</div>
-	</main>
-	<?php $this->load->view('template/footer'); ?>	
+<div class="app-page-header">
+    <p class="app-page-kicker">Vendor Demo</p>
+    <div class="d-flex flex-column flex-lg-row justify-content-lg-between align-items-lg-end gap-3">
+        <div>
+            <h1 class="h2 mb-2">Select2 integration</h1>
+            <p class="text-secondary mb-0">Bootstrap form controls wrapped around the Select2 demo states used in this app.</p>
+        </div>
+        <a href="<?php echo site_url('vendor'); ?>" class="btn btn-outline-secondary">Back to vendors</a>
+    </div>
 </div>
 
-<!-- jQuery -->
-<script src="<?php echo base_url('application/assets/vendor/jquery/jquery.min.js'); ?>"></script>
+<div class="row g-4">
+    <div class="col-xl-8">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+                <h2 class="h5 mb-4">Examples</h2>
+                <form class="row g-4">
+                    <div class="col-12">
+                        <label for="singleSelect" class="form-label">Basic single select</label>
+                        <select id="singleSelect" class="form-select">
+                            <option></option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                            <option value="4">Option 4</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label for="singleCustomSelect" class="form-label">Single custom select</label>
+                        <select id="singleCustomSelect" class="form-select">
+                            <option></option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                            <option value="4">Option 4</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label for="multipleSelect" class="form-label">Multiple select</label>
+                        <select id="multipleSelect" class="form-select" multiple>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                            <option value="4">Option 4</option>
+                            <option value="5">Option 5</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label for="tagsSelect" class="form-label">Tagging support</label>
+                        <select id="tagsSelect" class="form-select" multiple>
+                            <option value="Tag1">Tag1</option>
+                            <option value="Tag2">Tag2</option>
+                            <option value="Tag3">Tag3</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body p-4">
+                <h2 class="h5 mb-3">Notes</h2>
+                <ul class="text-secondary mb-0">
+                    <li>Single-select examples use clearable placeholders.</li>
+                    <li>Multiple-select examples keep full-width responsive sizing.</li>
+                    <li>Custom overrides stay isolated to the Select2 stylesheet.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!-- Select2 JS -->
-<script src="<?php echo base_url('application/assets/vendor/select2/js/select2.min.js'); ?>"></script>
-
-<script>
-	$(document).ready(function() {
-		console.log("Initializing Select2...");
-		$('#singleSelect').select2({
-			placeholder: "Select an option",
-			allowClear: true,
-		});
-
-		$('#singleCustomSelect').select2({
-			placeholder: "Select an option",
-			allowClear: true,
-			dropdownCssClass: 'custom-select2-dropdown', // Custom CSS class for dropdown
-		});
-
-		$('#multipleSelect').select2({
-			placeholder: "Select options",
-		});
-
-		$('#tagsSelect').select2({
-			placeholder: "Select options",
-		});
-	});
-</script>
-</body>
-</html>
+<?php $this->load->view('template/app_end'); ?>
