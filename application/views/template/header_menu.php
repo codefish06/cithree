@@ -36,7 +36,7 @@
         <nav>
             <ul class="sidebar-list">
                 <li>
-                    <a href="/" class="sidebar-link">
+                    <a href="<?php echo site_url(); ?>" class="sidebar-link">
                         <span>Home</span>
                     </a>
                 </li>
@@ -50,15 +50,15 @@
                     </button>
                     <ul id="submenu-vendor" class="sidebar-submenu is-hidden">
                         <li>
-                            <a href="/vendor" class="sidebar-sublink">All</a>
+                            <a href="<?php echo site_url('vendor'); ?>" class="sidebar-sublink">All</a>
                         <li>
-                            <a href="/vendor/select2" class="sidebar-sublink">Select2</a>
+                            <a href="<?php echo site_url('vendor/select2'); ?>" class="sidebar-sublink">Select2</a>
                         </li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="/appearance" class="sidebar-link">
+                    <a href="<?php echo site_url('appearance'); ?>" class="sidebar-link">
                         <span>Appearance</span>
                     </a>
                 </li>

@@ -10,6 +10,7 @@
     } catch (e) {
       return null;
     }
+
     return null;
   }
 
@@ -30,24 +31,13 @@
     try {
       window.localStorage.setItem(STORAGE_KEY, theme);
     } catch (e) {
-      // Ignore storage failures (private mode / disabled storage).
+      // Ignore storage failures.
     }
-  }
-
-  function applyTheme(theme) {
-    if (!document.body) {
-      return;
-    }
-
-    var isDark = theme === 'dark';
-    document.body.classList.toggle('dark-mode', isDark);
-    document.body.setAttribute('data-theme', theme);
-    syncToggleLabels(theme);
   }
 
   function syncToggleLabels(theme) {
-    var toggles = document.querySelectorAll('[data-theme-toggle]');
     var nextLabel = theme === 'dark' ? 'Light' : 'Dark';
+    var toggles = document.querySelectorAll('[data-theme-toggle]');
 
     toggles.forEach(function(toggle) {
       var labelNode = toggle.querySelector('[data-theme-label]');
@@ -61,41 +51,19 @@
     });
   }
 
-  function createToggleButton() {
-    var button = document.createElement('button');
-    button.id = 'theme-toggle';
-    button.type = 'button';
-    button.className = 'theme-toggle-btn theme-toggle-floating';
-    button.setAttribute('data-theme-toggle', 'true');
-    button.innerHTML = '<span class="theme-toggle-icon" aria-hidden="true">T</span><span data-theme-label>Dark</span>';
-    return button;
-  }
-
-  function ensureToggleButton() {
-    var toggle = document.getElementById('theme-toggle');
-
-    if (!toggle) {
-      toggle = createToggleButton();
-      var headerRow = document.querySelector('.header-row');
-
-      if (headerRow) {
-        toggle.classList.remove('theme-toggle-floating');
-        headerRow.appendChild(toggle);
-      } else {
-        document.body.appendChild(toggle);
-      }
+  function applyTheme(theme) {
+    var root = document.documentElement;
+    if (!root) {
+      return;
     }
 
-    if (!toggle.hasAttribute('data-theme-toggle')) {
-      toggle.setAttribute('data-theme-toggle', 'true');
-    }
-
-    return toggle;
+    root.setAttribute('data-bs-theme', theme);
+    syncToggleLabels(theme);
   }
 
   function handleThemeToggleClick() {
-    var isDark = document.body.classList.contains('dark-mode');
-    var nextTheme = isDark ? 'light' : 'dark';
+    var currentTheme = document.documentElement.getAttribute('data-bs-theme') || 'light';
+    var nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
     applyTheme(nextTheme);
     saveTheme(nextTheme);
@@ -105,8 +73,9 @@
     var theme = getPreferredTheme();
     applyTheme(theme);
 
-    var toggle = ensureToggleButton();
-    toggle.addEventListener('click', handleThemeToggleClick);
+    document.querySelectorAll('[data-theme-toggle]').forEach(function(toggle) {
+      toggle.addEventListener('click', handleThemeToggleClick);
+    });
 
     if (window.matchMedia) {
       var mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');

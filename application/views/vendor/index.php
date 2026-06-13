@@ -1,51 +1,44 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Vendors - <?php echo APP_NAME; ?></title>
-	<link href="<?php echo base_url('application/assets/css/output.css'); ?>" rel="stylesheet">
-	<link href="<?php echo base_url('application/assets/css/grid-layout.css'); ?>" rel="stylesheet">
-</head>
-<body class="app-body">
 
-<div class="grid-container">
-	<?php $this->load->view('template/header_menu'); ?>
-	<main>
-	<h1 class="page-title">Vendor Package Testing</h1>
+$page_title = 'Vendor Packages';
+$active_nav = 'vendor';
+$this->load->view('template/app_start');
+?>
 
-	<div class="page-content">
-		<p class="text-block">This page provides a comprehensive listing of all third-party vendor packages integrated and tested in this application.</p>
-
-		<h2 class="section-label">Vendor Packages</h2>
-		
-		<table class="table-standard">
-			<thead>
-				<tr>
-					<th>Package Name</th>
-					<th>Version</th>
-					<th>Description</th>
-					<th>Status</th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Select2</td>
-					<td>4.1.0</td>
-					<td>jQuery plugin for enhanced select boxes with search and tagging capabilities</td>
-					<td><span class="status-active">Active</span></td>
-					<td><a href="<?php echo base_url('vendor/select2'); ?>" class="link-primary">Test</a></td>
-				</tr>
-			</tbody>
-		</table>
-
-	</div>
-	</main>
-	<?php $this->load->view('template/footer'); ?>
-
+<div class="app-page-header">
+    <p class="app-page-kicker">Integrations</p>
+    <h1 class="h2 mb-2">Vendor package testing</h1>
+    <p class="text-secondary mb-0">A consolidated view of third-party packages integrated into the application.</p>
 </div>
 
-</body>
-</html>
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">Package</th>
+                        <th scope="col">Version</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Status</th>
+                        <th scope="col" class="text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="fw-semibold">Select2</td>
+                        <td><code>4.1.0</code></td>
+                        <td>jQuery plugin for enhanced select boxes with search and tagging support.</td>
+                        <td><span class="badge text-bg-success">Active</span></td>
+                        <td class="text-end">
+                            <a href="<?php echo site_url('vendor/select2'); ?>" class="btn btn-outline-primary btn-sm">Open demo</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<?php $this->load->view('template/app_end'); ?>
