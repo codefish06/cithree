@@ -37,6 +37,22 @@ Update the files in `application/config/` as needed:
 
 CodeIgniter Composer autoloading is currently disabled via `$config['composer_autoload'] = FALSE`, so Composer packages are not required to boot the app.
 
+## Docker Run
+
+If your host PHP 8.1 install is broken, run the app in a Docker container instead:
+
+```bash
+docker compose up --build
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8000/
+```
+
+The container uses `php:8.1-cli` and runs the built-in PHP server on port `8000`.
+
 ## Assets
 
 - Primary stylesheet: `application/assets/css/output.css`

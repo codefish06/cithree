@@ -1,0 +1,11 @@
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/var/www/html
+    environment:
+      CI_ENV: development
+    command: php -S 0.0.0.0:8000 -t /var/www/html
