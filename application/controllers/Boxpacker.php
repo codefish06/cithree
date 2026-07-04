@@ -9,17 +9,19 @@ class Boxpacker extends CI_Controller
 {
     public function index()
     {
+        $boxChoices = $this->getBoxChoices();
         $packRequests = $this->getGettingStartedPackRequests();
-        $packedBoxes = $this->runPack($this->getBoxChoices(), $packRequests);
+        $packedBoxes = $this->runPack($boxChoices, $packRequests);
 
         $csvPackRequests = $this->getCsvPackRequests();
-        $csvPackedBoxes = $this->runPack($this->getRewardsBoxChoices(), $csvPackRequests);
+        $csvPackedBoxes = $this->runPack($boxChoices, $csvPackRequests);
 
         $this->load->view('boxpacker/index', [
             'packed_boxes' => $packedBoxes,
             'pack_requests' => $packRequests,
             'csv_packed_boxes' => $csvPackedBoxes,
             'csv_pack_requests' => $csvPackRequests,
+            'box_choices' => $boxChoices,
         ]);
     }
 
@@ -44,19 +46,13 @@ class Boxpacker extends CI_Controller
 
     private function getBoxChoices()
     {
-        return [
-            new BoxpackerExampleBox('Le petite box', 300, 300, 10, 10, 296, 296, 8, 1000),
-            new BoxpackerExampleBox('Le grande box', 3000, 3000, 100, 100, 2960, 2960, 80, 10000),
-        ];
-    }
+        $boxes = [];
 
-    private function getRewardsBoxChoices()
-    {
-        return [
-            new BoxpackerExampleBox('Rewards Small Carton', 320, 220, 120, 120, 300, 200, 100, 1500),
-            new BoxpackerExampleBox('Rewards Medium Carton', 420, 320, 180, 180, 400, 300, 160, 4000),
-            new BoxpackerExampleBox('Rewards Large Carton', 520, 420, 240, 250, 500, 400, 220, 8000),
-        ];
+        foreach ($this->getBoxDefinitions() as $definition) {
+            $boxes[] = $this->createBox($definition);
+        }
+
+        return $boxes;
     }
 
     private function getGettingStartedPackRequests()
@@ -89,19 +85,12 @@ class Boxpacker extends CI_Controller
         $requests = [];
 
         foreach ($definitions as $key => $definition) {
-            $rawQuantity = isset($quantities[$key]) ? $quantities[$key] : 1;
+            $rawQuantity = isset($quantities[$key]) ? $quantities[$key] : $definition['default_qty'];
             $quantity = max(0, (int) $rawQuantity);
 
             $requests[] = [
                 'key' => $key,
-                'item' => new BoxpackerExampleItem(
-                    $definition['title'],
-                    $definition['width'],
-                    $definition['length'],
-                    $definition['depth'],
-                    $definition['weight_g'],
-                    $definition['keep_flat']
-                ),
+                'item' => $this->createItem($definition),
                 'qty' => $quantity,
                 'product_code' => $definition['product_code'],
                 'comment' => $definition['comment'],
@@ -114,47 +103,194 @@ class Boxpacker extends CI_Controller
     private function getCsvProductDefinitions()
     {
         return [
-            'stress_reliever' => [
-                'title' => 'Cool Round Stress Reliever',
-                'comment' => 'Bounce, throw or squeeze this round stress ball.',
-                'width' => 70,
+            'powerbank' => [
+                'title' => 'Powerbank',
+                'comment' => 'Portable charging powerbank.',
+                'width' => 110,
                 'length' => 70,
-                'depth' => 70,
-                'weight_g' => 20,
+                'depth' => 20,
+                'weight_g' => 220,
                 'keep_flat' => FALSE,
-                'product_code' => 'BROWREWARDS-US-030',
+                'product_code' => 'TEST-POWERBANK-001',
+                'default_qty' => 100,
             ],
-            'passport_wallet' => [
-                'title' => 'Deluxe Recycled Passport Wallet',
-                'comment' => 'Premium PU leather passport holder with anti-skimming protection.',
-                'width' => 114,
-                'length' => 146,
-                'depth' => 12,
-                'weight_g' => 60,
+            'magsafe_iphone_17_charger' => [
+                'title' => 'Magsafe iPhone 17 Charger',
+                'comment' => 'MagSafe-compatible wireless charger for iPhone 17.',
+                'width' => 95,
+                'length' => 95,
+                'depth' => 15,
+                'weight_g' => 140,
                 'keep_flat' => TRUE,
-                'product_code' => 'BROWREWARDS-US-048',
+                'product_code' => 'TEST-MAGSAFE-IPHONE-17-001',
+                'default_qty' => 100,
             ],
-            'laptop_stand_speaker' => [
-                'title' => 'Elevate Laptop Stand and Bluetooth Speaker',
-                'comment' => 'Foldable laptop stand adjustable up to 35 degrees, with Bluetooth speaker.',
-                'width' => 32,
-                'length' => 248,
-                'depth' => 213,
-                'weight_g' => 160,
-                'keep_flat' => FALSE,
-                'product_code' => 'BROWREWARDS-US-044',
-            ],
-            'laptop_backpack' => [
-                'title' => 'Greenway Recycled 15inch Laptop Backpack',
-                'comment' => 'PU backpack with adjustable straps and multiple pockets.',
+            'bagpack' => [
+                'title' => 'Bagpack',
+                'comment' => 'Everyday backpack for carry and storage.',
                 'width' => 450,
                 'length' => 330,
                 'depth' => 120,
-                'weight_g' => 910,
+                'weight_g' => 900,
                 'keep_flat' => FALSE,
-                'product_code' => 'BROWREWARDS-US-047',
+                'product_code' => 'TEST-BAGPACK-001',
+                'default_qty' => 70,
+            ],
+            'laptop_stand' => [
+                'title' => 'Laptop Stand',
+                'comment' => 'Foldable laptop stand for desk use.',
+                'width' => 320,
+                'length' => 250,
+                'depth' => 25,
+                'weight_g' => 160,
+                'keep_flat' => FALSE,
+                'product_code' => 'TEST-LAPTOP-STAND-001',
+                'default_qty' => 5,
             ],
         ];
+    }
+
+    private function getBoxDefinitions()
+    {
+        return [
+            [
+                'reference' => 'UPS Small Cube',
+                'outer_width' => 156,
+                'outer_length' => 156,
+                'outer_depth' => 156,
+                'empty_weight' => 12,
+                'inner_width' => 152,
+                'inner_length' => 152,
+                'inner_depth' => 152,
+                'max_weight' => 5000,
+            ],
+            [
+                'reference' => 'UPS Small Rectangle',
+                'outer_width' => 207,
+                'outer_length' => 156,
+                'outer_depth' => 131,
+                'empty_weight' => 14,
+                'inner_width' => 203,
+                'inner_length' => 152,
+                'inner_depth' => 127,
+                'max_weight' => 5000,
+            ],
+            [
+                'reference' => 'UPS Medium Cube',
+                'outer_width' => 207,
+                'outer_length' => 207,
+                'outer_depth' => 207,
+                'empty_weight' => 18,
+                'inner_width' => 203,
+                'inner_length' => 203,
+                'inner_depth' => 203,
+                'max_weight' => 7000,
+            ],
+            [
+                'reference' => 'UPS Medium Rectangle',
+                'outer_width' => 309,
+                'outer_length' => 233,
+                'outer_depth' => 156,
+                'empty_weight' => 20,
+                'inner_width' => 305,
+                'inner_length' => 229,
+                'inner_depth' => 152,
+                'max_weight' => 10000,
+            ],
+            [
+                'reference' => 'UPS Flat Box',
+                'outer_width' => 309,
+                'outer_length' => 233,
+                'outer_depth' => 55,
+                'empty_weight' => 12,
+                'inner_width' => 305,
+                'inner_length' => 229,
+                'inner_depth' => 51,
+                'max_weight' => 3000,
+            ],
+            [
+                'reference' => 'UPS Long Flat Box',
+                'outer_width' => 334,
+                'outer_length' => 283,
+                'outer_depth' => 55,
+                'empty_weight' => 14,
+                'inner_width' => 330,
+                'inner_length' => 279,
+                'inner_depth' => 51,
+                'max_weight' => 3000,
+            ],
+            [
+                'reference' => 'FedEx Small Box',
+                'outer_width' => 280,
+                'outer_length' => 42,
+                'outer_depth' => 318,
+                'empty_weight' => 16,
+                'inner_width' => 276,
+                'inner_length' => 38,
+                'inner_depth' => 314,
+                'max_weight' => 3000,
+            ],
+            [
+                'reference' => 'FedEx Medium Box',
+                'outer_width' => 296,
+                'outer_length' => 64,
+                'outer_depth' => 341,
+                'empty_weight' => 18,
+                'inner_width' => 292,
+                'inner_length' => 60,
+                'inner_depth' => 337,
+                'max_weight' => 3000,
+            ],
+            [
+                'reference' => 'FedEx Large Box',
+                'outer_width' => 458,
+                'outer_length' => 318,
+                'outer_depth' => 80,
+                'empty_weight' => 24,
+                'inner_width' => 454,
+                'inner_length' => 314,
+                'inner_depth' => 76,
+                'max_weight' => 12000,
+            ],
+            [
+                'reference' => 'Backpack Carton',
+                'outer_width' => 524,
+                'outer_length' => 424,
+                'outer_depth' => 244,
+                'empty_weight' => 30,
+                'inner_width' => 520,
+                'inner_length' => 420,
+                'inner_depth' => 240,
+                'max_weight' => 20000,
+            ],
+        ];
+    }
+
+    private function createBox($definition)
+    {
+        return new BoxpackerExampleBox(
+            $definition['reference'],
+            $definition['outer_width'],
+            $definition['outer_length'],
+            $definition['outer_depth'],
+            $definition['empty_weight'],
+            $definition['inner_width'],
+            $definition['inner_length'],
+            $definition['inner_depth'],
+            $definition['max_weight']
+        );
+    }
+
+    private function createItem($definition)
+    {
+        return new BoxpackerExampleItem(
+            $definition['title'],
+            $definition['width'],
+            $definition['length'],
+            $definition['depth'],
+            $definition['weight_g'],
+            $definition['keep_flat']
+        );
     }
 }
 

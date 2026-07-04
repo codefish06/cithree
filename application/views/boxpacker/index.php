@@ -111,8 +111,49 @@
     </style>
 </head>
 <body>
+    <?php
+    $renderPackedBoxes = function ($packedBoxes) {
+        foreach ($packedBoxes as $packed_box) {
+            $box = $packed_box->getBox();
+            ?>
+            <div class="box">
+                <h3><?php echo html_escape($box->getReference()); ?></h3>
+                <p>
+                    Outer dimensions:
+                    <?php echo (int) $box->getOuterWidth(); ?> x
+                    <?php echo (int) $box->getOuterLength(); ?> x
+                    <?php echo (int) $box->getOuterDepth(); ?>mm
+                </p>
+                <p>Total packed weight: <?php echo (int) $packed_box->getWeight(); ?>g</p>
+
+                <h4>Items in this box</h4>
+                <ul>
+                    <?php foreach ($packed_box->getItems() as $packed_item): ?>
+                        <li><?php echo html_escape($packed_item->getItem()->getDescription()); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <?php
+        }
+    };
+    ?>
+
     <h1>BoxPacker Getting Started Example</h1>
     <p>This route reproduces the <code>Packing a set of items into a given set of box types</code> example from the BoxPacker 3.x docs using application-defined <code>Box</code> and <code>Item</code> classes.</p>
+
+    <h2>Box choices</h2>
+    <p>The packer now uses one shared set of 10 shipping boxes for both tests.</p>
+    <ul>
+        <?php foreach ($box_choices as $box_choice): ?>
+            <li>
+                <?php echo html_escape($box_choice->getReference()); ?> -
+                inner <?php echo (int) $box_choice->getInnerWidth(); ?> x
+                <?php echo (int) $box_choice->getInnerLength(); ?> x
+                <?php echo (int) $box_choice->getInnerDepth(); ?>mm,
+                max weight <?php echo (int) $box_choice->getMaxWeight(); ?>g
+            </li>
+        <?php endforeach; ?>
+    </ul>
 
     <h2>Requested items</h2>
     <ul>
@@ -129,30 +170,10 @@
 
     <h2>Result</h2>
     <p>These items fitted into <?php echo count($packed_boxes); ?> box(es).</p>
+    <?php $renderPackedBoxes($packed_boxes); ?>
 
-    <?php foreach ($packed_boxes as $packed_box): ?>
-        <?php $box = $packed_box->getBox(); ?>
-        <div class="box">
-            <h3><?php echo html_escape($box->getReference()); ?></h3>
-            <p>
-                Outer dimensions:
-                <?php echo (int) $box->getOuterWidth(); ?> x
-                <?php echo (int) $box->getOuterLength(); ?> x
-                <?php echo (int) $box->getOuterDepth(); ?>mm
-            </p>
-            <p>Total packed weight: <?php echo (int) $packed_box->getWeight(); ?>g</p>
-
-            <h4>Items in this box</h4>
-            <ul>
-                <?php foreach ($packed_box->getItems() as $packed_item): ?>
-                    <li><?php echo html_escape($packed_item->getItem()->getDescription()); ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endforeach; ?>
-
-    <h2>CSV Product Combination</h2>
-    <p>This second packer uses the BrowserStack Rewards CSV products you requested. Change the quantities and click <code>Repack</code> to recalculate.</p>
+    <h2>Second Test</h2>
+    <p>This second packer uses the current test items you requested. Change the quantities and click <code>Repack</code> to recalculate.</p>
 
     <form method="get" action="">
         <div class="panel product-grid">
@@ -183,26 +204,6 @@
     </form>
 
     <p>These CSV products fitted into <?php echo count($csv_packed_boxes); ?> box(es).</p>
-
-    <?php foreach ($csv_packed_boxes as $packed_box): ?>
-        <?php $box = $packed_box->getBox(); ?>
-        <div class="box">
-            <h3><?php echo html_escape($box->getReference()); ?></h3>
-            <p>
-                Outer dimensions:
-                <?php echo (int) $box->getOuterWidth(); ?> x
-                <?php echo (int) $box->getOuterLength(); ?> x
-                <?php echo (int) $box->getOuterDepth(); ?>mm
-            </p>
-            <p>Total packed weight: <?php echo (int) $packed_box->getWeight(); ?>g</p>
-
-            <h4>Items in this box</h4>
-            <ul>
-                <?php foreach ($packed_box->getItems() as $packed_item): ?>
-                    <li><?php echo html_escape($packed_item->getItem()->getDescription()); ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endforeach; ?>
+    <?php $renderPackedBoxes($csv_packed_boxes); ?>
 </body>
 </html>
